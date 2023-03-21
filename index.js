@@ -2,6 +2,8 @@
 const btnDigits = document.querySelectorAll(".btn.digits");
 const btnOperator = document.querySelectorAll(".btn.operators");
 const btnEqual = document.querySelector(".equal");
+const btnClear = document.querySelector(".clear");
+const btnDelete = document.querySelector(".delete");
 
 const screenValue = document.querySelector(".value");
 const screenOperation = document.querySelector(".operation");
@@ -25,19 +27,21 @@ btnDigits.forEach((button) => {
       value += `${button.innerText}`;
       showNumbers(value);
     }
-    if (!num1 && !num2) {
-      num1 = +value;
-      value = undefined;
-    } else if (num1 !== undefined && !num2) {
-      console.log(num1);
-      console.log(value);
-      num2 = +value;
-      value = undefined;
-    } else if (num1 !== undefined && num2 !== undefined) {
-      num1 = +total;
-      num2 = +value;
-      value = undefined;
-    }
+    // if (!num1 && !num2) {
+    //   num1 = +value;
+    //   console.log(num1);
+    //   value = undefined;
+    //   console.log(value);
+    // } else if (num1 !== undefined && !num2) {
+    //   console.log(num1);
+    //   console.log(value);
+    //   num2 = +value;
+    //   value = undefined;
+    // } else if (num1 !== undefined && num2 !== undefined) {
+    //   num1 = +total;
+    //   num2 = +value;
+    //   value = undefined;
+    // }
   });
 });
 
@@ -61,6 +65,22 @@ btnOperator.forEach((button) => {
 btnEqual.addEventListener("click", () => {
   total = operate(num1, operator, num2);
   showNumbers(total);
+});
+
+btnClear.addEventListener("click", () => {
+  console.log("clear");
+  value = undefined;
+  num1 = undefined;
+  num2 = undefined;
+  total = undefined;
+  operator = undefined;
+  showNumbers(value);
+});
+
+btnDelete.addEventListener("click", () => {
+  if (value) {
+    value.slice(0, -1);
+  }
 });
 
 // Math Operations
