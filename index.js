@@ -19,12 +19,16 @@ const operation = [];
 btnDigits.forEach((button) => {
   button.addEventListener("click", () => {
     //Numbers
+    console.log(value);
     if (value === undefined) {
       value = `${button.innerText}`;
+      console.log("Was Undefined:", value);
+
       //screenValue.innerText=value;
       showNumbers(value);
     } else {
       value += `${button.innerText}`;
+      console.log("Was Not Undefined:", value);
       showNumbers(value);
     }
     // if (!num1 && !num2) {
@@ -47,6 +51,29 @@ btnDigits.forEach((button) => {
 
 btnOperator.forEach((button) => {
   button.addEventListener("click", () => {
+    console.log("Value when click operator:", value);
+    if (!num1 && !num2) {
+      num1 = +value;
+      console.log("Num1:", num1);
+      value = undefined;
+      console.log(value);
+    } else if (num1 !== undefined && num2 === undefined) {
+      console.log("Value of num1 when no num2:", num1);
+      num2 = +value;
+      console.log(num2);
+      total = operate(num1, operator, num2);
+      num1 = +total;
+      num2 = undefined;
+      value = undefined;
+      showNumbers(num1);
+    } else if (num1 !== undefined && num2 !== undefined) {
+      total = operate(num1, operator, num2);
+      console.log(`This total when num2 is defined: ${total}`);
+      showNumbers(total);
+      num1 = +total;
+      num2 = +value;
+      value = undefined;
+    }
     //Operators
     switch (button.innerText) {
       case "+":
@@ -63,7 +90,9 @@ btnOperator.forEach((button) => {
 });
 
 btnEqual.addEventListener("click", () => {
+  num2 = +value;
   total = operate(num1, operator, num2);
+  console.log(`Total:${total} of numbers ${num1} & ${num2} and ${operator}`);
   showNumbers(total);
 });
 
@@ -73,15 +102,12 @@ btnClear.addEventListener("click", () => {
   num1 = undefined;
   num2 = undefined;
   total = undefined;
-  operator = undefined;
+  operator = "";
   showNumbers(value);
+  showOperation(operator);
 });
 
-btnDelete.addEventListener("click", () => {
-  if (value) {
-    value.slice(0, -1);
-  }
-});
+btnDelete.addEventListener("click", deleteValue);
 
 // Math Operations
 
@@ -125,9 +151,13 @@ function operate(num1, operator, num2) {
 
 function showNumbers(value) {
   screenValue.innerText = value;
-  if (value === undefined) screenValue.innerText = " ";
+  //if (value === undefined) screenValue.innerText = " ";
 }
 
 function showOperation(operator) {
   screenOperation.innerText = operator;
+}
+
+function deleteValue() {
+  return value.slice(0, -1);
 }
