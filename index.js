@@ -14,7 +14,7 @@ let num1;
 let num2;
 let total;
 let operator;
-const operation = [];
+let active = false;
 
 //Events listeners
 
@@ -33,26 +33,12 @@ btnDigits.forEach((button) => {
       console.log("Was Not Undefined:", value);
       showNumbers(value);
     }
-    // if (!num1 && !num2) {
-    //   num1 = +value;
-    //   console.log(num1);
-    //   value = undefined;
-    //   console.log(value);
-    // } else if (num1 !== undefined && !num2) {
-    //   console.log(num1);
-    //   console.log(value);
-    //   num2 = +value;
-    //   value = undefined;
-    // } else if (num1 !== undefined && num2 !== undefined) {
-    //   num1 = +total;
-    //   num2 = +value;
-    //   value = undefined;
-    // }
   });
 });
 
 btnOperator.forEach((button) => {
   button.addEventListener("click",()=>{
+    active=false;
     addOperator();
     switch (button.innerText) {
       case "+":
@@ -112,11 +98,21 @@ btnOperator.forEach((button) => {
 //   });
 // });
 
+btnDot.addEventListener("click",()=>{
+  if(!active){
+    let newValue = value + '.';
+    active=true;
+    value=newValue;
+    showNumbers(value)
+  }
+})
+
 btnEqual.addEventListener("click", equal);
 
 btnClear.addEventListener("click", clearScreen);
 
 btnDelete.addEventListener("click",deleteValue);
+
 //Functions
 // Math Operations
 
