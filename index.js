@@ -129,6 +129,7 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+  if(num2===0)return 'ERROR'
   return num1 / num2;
 }
 
@@ -216,6 +217,7 @@ function clearScreen(){
   num2 = undefined;
   total = undefined;
   operator = "";
+  active=false;
   showNumbers(value);
   showOperation(operator);
 }
