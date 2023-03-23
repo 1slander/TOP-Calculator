@@ -4,7 +4,7 @@ const btnOperator = document.querySelectorAll(".btn.operators");
 const btnEqual = document.querySelector(".equal");
 const btnClear = document.querySelector(".clear");
 const btnDelete = document.querySelector(".delete");
-const btnDot = document.querySelector(".btn.dot")
+const btnDot = document.querySelector(".btn.dot");
 
 const screenValue = document.querySelector(".value");
 const screenOperation = document.querySelector(".operation");
@@ -37,8 +37,8 @@ btnDigits.forEach((button) => {
 });
 
 btnOperator.forEach((button) => {
-  button.addEventListener("click",()=>{
-    active=false;
+  button.addEventListener("click", () => {
+    active = false;
     addOperator();
     switch (button.innerText) {
       case "+":
@@ -49,8 +49,8 @@ btnOperator.forEach((button) => {
         break;
     }
     showOperation(operator);
-  })})
-
+  });
+});
 
 // btnOperator.forEach((button) => {
 //   button.addEventListener("click", () => {
@@ -98,20 +98,20 @@ btnOperator.forEach((button) => {
 //   });
 // });
 
-btnDot.addEventListener("click",()=>{
-  if(!active){
-    let newValue = value + '.';
-    active=true;
-    value=newValue;
-    showNumbers(value)
+btnDot.addEventListener("click", () => {
+  if (!active) {
+    let newValue = value + ".";
+    active = true;
+    value = newValue;
+    showNumbers(value);
   }
-})
+});
 
 btnEqual.addEventListener("click", equal);
 
 btnClear.addEventListener("click", clearScreen);
 
-btnDelete.addEventListener("click",deleteValue);
+btnDelete.addEventListener("click", deleteValue);
 
 //Functions
 // Math Operations
@@ -129,102 +129,103 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-  if(num2===0)return 'ERROR'
+  if (num2 === 0) return "ERROR";
   return num1 / num2;
 }
 
 //Operate
 
 function operate(num1, operator, num2) {
+  let a = Number(num1);
+  let b = Number(num2);
   switch (operator) {
     case "+":
       //console.log("suma");
-      return add(num1, num2);
+      return add(a, b);
       break;
     case "-":
-      return subtract(num1, num2);
+      return subtract(a, b);
       break;
     case "x":
-      return multiply(num1, num2);
+      return multiply(a, b);
       break;
     case "÷":
-      return divide(num1, num2);
+      return divide(a, b);
       break;
   }
 }
 
-
 // Display
 
 function showNumbers(value) {
-  
-  screenValue.innerText = value;
+  screenValue.innerText = `${value}`;
   //if (value === undefined) screenValue.innerText = " ";
 }
 
 function showOperation(operator) {
-  
   screenOperation.innerText = operator;
 }
 
 // Buttons
 
-function addOperator(){
-    if(total){
-      showNumbers(total);
-    }
-    if (!num1 && !num2) {
-      num1 = +value;
-      console.log("Num1:", num1);
-      value = "";
-      console.log("Value when num1 is defined:",value);
-    } else if (num1 !== undefined && num2 === undefined) {
-      console.log("Value of num1 when no num2:", num1);
-      num2 = +value;
-      console.log('This Num2:',num2);
-      total = operate(num1, operator, num2);
-      console.log('This total:',total)
-      num1 = +total;
-      showNumbers(num1);
-      console.log('This Num1:',num1)
-      num2 = undefined;
-      console.log('This Num2 Should be Undefined:', num2)
-      value = "";
-    }
-      else if (num1 !== undefined && num2 !== undefined) {
-      console.log('THIS PART IS WORKING')
-      total = operate(num1, operator, num2);
-      console.log(`This total when num2 is defined: ${total}`);
-      showNumbers(total);
-      num1 = +total;
-      num2 = +value;
-      value = "";
-    }
-    
-  };
-
-
-
-function deleteValue() {
-  let newValue=value.slice(0,-1);
-  showNumbers(newValue);
-  return value=newValue;
+function addOperator() {
+  if (total) {
+    showNumbers(total);
+  }
+  if (!num1 && !num2) {
+    num1 = value;
+    console.log("Num1:", num1);
+    value = "";
+    console.log("Value when num1 is defined:", value);
+  } else if (num1 !== undefined && num2 === undefined) {
+    console.log("Value of num1 when no num2:", num1);
+    num2 = value;
+    console.log("This Num2:", num2);
+    total = operate(num1, operator, num2);
+    console.log("This total:", total);
+    num1 = total;
+    showNumbers(num1);
+    console.log("This Num1:", num1);
+    num2 = undefined;
+    console.log("This Num2 Should be Undefined:", num2);
+    value = "";
+  } else if (num1 !== undefined && num2 !== undefined) {
+    console.log("THIS PART IS WORKING");
+    total = operate(num1, operator, num2);
+    console.log(`This total when num2 is defined: ${total}`);
+    showNumbers(total);
+    num1 = total;
+    num2 = value;
+    value = "";
+  }
 }
 
-function clearScreen(){
+function deleteValue() {
+  let newValue = value.slice(0, -1);
+  showNumbers(newValue);
+  return (value = newValue);
+}
+
+function clearScreen() {
   value = "";
   num1 = undefined;
   num2 = undefined;
   total = undefined;
   operator = "";
-  active=false;
+  active = false;
   showNumbers(value);
   showOperation(operator);
 }
 
-function equal(){
-  num2 = +value;
+function equal() {
+  num2 = value;
   total = operate(num1, operator, num2);
+  let totalString = total.toString();
+  console.log(typeof totalString, totalString);
+  if (totalString.length >= 12) {
+    console.log("+12");
+    total = Number(Math.round(totalString * 1000) / 1000);
+  }
   //console.log(`Total:${total} of numbers ${num1} & ${num2} and ${operator}`);
   showNumbers(total);
 }
