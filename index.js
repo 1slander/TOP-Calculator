@@ -15,23 +15,26 @@ let num2;
 let total;
 let operator;
 let active = false;
+let equalActive = false;
 
 //Events listeners
 
 btnDigits.forEach((button) => {
   button.addEventListener("click", () => {
     //Numbers
-    console.log(value);
-    if (value === undefined) {
-      value = `${button.innerText}`;
-      console.log("Was Undefined:", value);
+    if (!equalActive) {
+      console.log(value);
+      if (value === undefined) {
+        value = `${button.innerText}`;
+        console.log("Was Undefined:", value);
 
-      //screenValue.innerText=value;
-      showNumbers(value);
-    } else {
-      value += `${button.innerText}`;
-      console.log("Was Not Undefined:", value);
-      showNumbers(value);
+        //screenValue.innerText=value;
+        showNumbers(value);
+      } else {
+        value += `${button.innerText}`;
+        console.log("Was Not Undefined:", value);
+        showNumbers(value);
+      }
     }
   });
 });
@@ -39,6 +42,7 @@ btnDigits.forEach((button) => {
 btnOperator.forEach((button) => {
   button.addEventListener("click", () => {
     active = false;
+    equalActive = false;
     addOperator();
     switch (button.innerText) {
       case "+":
@@ -213,11 +217,13 @@ function clearScreen() {
   total = undefined;
   operator = "";
   active = false;
+  equalActive = false;
   showNumbers(value);
   showOperation(operator);
 }
 
 function equal() {
+  equalActive = true;
   num2 = value;
   total = operate(num1, operator, num2);
   let totalString = total.toString();
