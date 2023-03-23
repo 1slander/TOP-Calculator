@@ -225,13 +225,13 @@ function clearScreen() {
 function equal() {
   equalActive = true;
   num2 = value;
-  total = operate(num1, operator, num2);
-  let totalString = total.toString();
-  console.log(typeof totalString, totalString);
-  if (totalString.length >= 12) {
-    console.log("+12");
-    total = Number(Math.round(totalString * 1000) / 1000);
-  }
+  total = Number(operate(num1, operator, num2)).toFixed(8);
+  // let totalString = total.toString();
+  // console.log(typeof totalString, totalString);
+  // if (totalString.length >= 12) {
+  //   console.log("+12");
+  //   total = Number(Math.round(totalString * 1000) / 1000).toFixed(8);
+  // }
   //console.log(`Total:${total} of numbers ${num1} & ${num2} and ${operator}`);
   showNumbers(total);
 }
