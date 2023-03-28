@@ -142,6 +142,7 @@ function divide(num1, num2) {
 function operate(num1, operator, num2) {
   let a = Number(num1);
   let b = Number(num2);
+
   switch (operator) {
     case "+":
       //console.log("suma");
@@ -225,7 +226,11 @@ function clearScreen() {
 function equal() {
   equalActive = true;
   num2 = value;
-  total = Number(operate(num1, operator, num2)).toFixed(8);
+  if (active) {
+    total = Math.round(Number(operate(num1, operator, num2)).toFixed(8));
+  } else {
+    total = Number(operate(num1, operator, num2));
+  }
   // let totalString = total.toString();
   // console.log(typeof totalString, totalString);
   // if (totalString.length >= 12) {
