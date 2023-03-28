@@ -140,24 +140,26 @@ function divide(num1, num2) {
 //Operate
 
 function operate(num1, operator, num2) {
-  let a = Number(num1);
-  let b = Number(num2);
+  let a = parseInt(num1);
+  let b = parseInt(num2);
+  let result = "";
 
   switch (operator) {
     case "+":
       //console.log("suma");
-      return add(a, b);
+      result = add(a, b);
       break;
     case "-":
-      return subtract(a, b);
+      result = subtract(a, b);
       break;
     case "x":
-      return multiply(a, b);
+      result = multiply(a, b);
       break;
     case "÷":
-      return divide(a, b);
+      result = divide(a, b);
       break;
   }
+  return result.toFixed(8);
 }
 
 // Display
@@ -226,11 +228,8 @@ function clearScreen() {
 function equal() {
   equalActive = true;
   num2 = value;
-  if (active) {
-    total = Math.round(Number(operate(num1, operator, num2)).toFixed(8));
-  } else {
-    total = Number(operate(num1, operator, num2));
-  }
+  total = Number(operate(num1, operator, num2));
+
   // let totalString = total.toString();
   // console.log(typeof totalString, totalString);
   // if (totalString.length >= 12) {
