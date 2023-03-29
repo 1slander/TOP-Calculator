@@ -17,6 +17,7 @@ let operator;
 let active = false;
 let equalActive = false;
 
+
 //Events listeners
 
 btnDigits.forEach((button) => {
@@ -143,6 +144,7 @@ function operate(num1, operator, num2) {
   let a = parseInt(num1);
   let b = parseInt(num2);
   let result = "";
+  
 
   switch (operator) {
     case "+":
@@ -159,14 +161,16 @@ function operate(num1, operator, num2) {
       result = divide(a, b);
       break;
   }
-  return result.toFixed(8);
+  
+  
+  return Math.round(1000000*result)/1000000;
 }
 
 // Display
 
 function showNumbers(value) {
   screenValue.innerText = `${value}`;
-  //if (value === undefined) screenValue.innerText = " ";
+
 }
 
 function showOperation(operator) {
@@ -180,26 +184,29 @@ function addOperator() {
     showNumbers(total);
   }
   if (!num1 && !num2) {
+    console.log('1. !NUM1 & !NUM2')
     num1 = value;
-    console.log("Num1:", num1);
+    //console.log("Num1:", num1);
     value = "";
-    console.log("Value when num1 is defined:", value);
+    //console.log("Value when num1 is defined:", value);
   } else if (num1 !== undefined && num2 === undefined) {
-    console.log("Value of num1 when no num2:", num1);
+    //console.log("Value of num1 when no num2:", num1);
+    console.log('2. NUM1 & !NUM2')
     num2 = value;
-    console.log("This Num2:", num2);
+    //console.log("This Num2:", num2);
     total = operate(num1, operator, num2);
-    console.log("This total:", total);
+    //console.log("This total:", total);
     num1 = total;
     showNumbers(num1);
-    console.log("This Num1:", num1);
+    //console.log("This Num1:", num1);
     num2 = undefined;
-    console.log("This Num2 Should be Undefined:", num2);
+    //console.log("This Num2 Should be Undefined:", num2);
     value = "";
   } else if (num1 !== undefined && num2 !== undefined) {
-    console.log("THIS PART IS WORKING");
+    console.log('3. NUM1 & NUM2')
+    //console.log("THIS PART IS WORKING");
     total = operate(num1, operator, num2);
-    console.log(`This total when num2 is defined: ${total}`);
+   // console.log(`This total when num2 is defined: ${total}`);
     showNumbers(total);
     num1 = total;
     num2 = value;
@@ -226,16 +233,19 @@ function clearScreen() {
 }
 
 function equal() {
-  equalActive = true;
-  num2 = value;
-  total = Number(operate(num1, operator, num2));
+  if(!num1 && !num2){
+    return;
+    //console.log(value)
+  } else {
+    equalActive = true;
+    //console.log(num1)
+   // console.log(num2)
+    num2 = value;
+    total = Number(operate(num1, operator, num2));
 
-  // let totalString = total.toString();
-  // console.log(typeof totalString, totalString);
-  // if (totalString.length >= 12) {
-  //   console.log("+12");
-  //   total = Number(Math.round(totalString * 1000) / 1000).toFixed(8);
-  // }
-  //console.log(`Total:${total} of numbers ${num1} & ${num2} and ${operator}`);
-  showNumbers(total);
+    showNumbers(total);
+  }
+  
+  //console.log('THis total:', total)
+  
 }
