@@ -57,51 +57,7 @@ btnOperator.forEach((button) => {
   });
 });
 
-// btnOperator.forEach((button) => {
-//   button.addEventListener("click", () => {
-//     console.log("Value when click operator:", value);
-//     if(total){
-//       showNumbers(total);
-//     }
-//     if (!num1 && !num2) {
-//       num1 = +value;
-//       console.log("Num1:", num1);
-//       value = "";
-//       console.log("Value when num1 is defined:",value);
-//     } else if (num1 !== undefined && num2 === undefined) {
-//       console.log("Value of num1 when no num2:", num1);
-//       num2 = +value;
-//       console.log('This Num2:',num2);
-//       total = operate(num1, operator, num2);
-//       console.log('This total:',total)
-//       num1 = +total;
-//       showNumbers(num1);
-//       console.log('This Num1:',num1)
-//       num2 = undefined;
-//       console.log('This Num2 Should be Undefined:', num2)
-//       value = "";
-//     }
-//      else if (num1 !== undefined && num2 !== undefined) {
-//       console.log('THIS PART IS WORKING')
-//       total = operate(num1, operator, num2);
-//       console.log(`This total when num2 is defined: ${total}`);
-//       showNumbers(total);
-//       num1 = +total;
-//       num2 = +value;
-//       value = "";
-//     }
-//     //Operators
-//     switch (button.innerText) {
-//       case "+":
-//       case "-":
-//       case "x":
-//       case "÷":
-//         operator = button.innerText;
-//         break;
-//     }
-//     showOperation(operator);
-//   });
-// });
+
 
 btnDot.addEventListener("click", () => {
   if (!active) {
