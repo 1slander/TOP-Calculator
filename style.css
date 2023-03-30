@@ -1,53 +1,97 @@
-*{
- margin: 0;
- padding: 0;
- box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: azure;
 }
 
-main{
- background-color: rgb(36, 30, 30);
- width: max-content;
- margin: auto;
- border: 3px solid black;
- border-radius: 5px;
- padding: 10px;
+main {
+  background-color: rgb(66, 65, 65);
+  width: max-content;
+  margin: 20% auto;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 15px;
+}
+.operation,
+.value {
+  padding-right: 5px;
+}
+.operation {
+  font-size: 2rem;
+}
+.value {
+  font-size: 2.5rem;
+}
+#screen {
+  width: 100%;
+  background-color: rgb(201, 194, 194);
+  border: 1px solid black;
+  height: 80px;
+  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  border-radius: 2px;
 }
 
-#screen{
- width: 100%;
- background-color: rgb(201, 194, 194);
- height: 50px;
- font-size: 40px;
- display: flex;
- justify-content: flex-end;
- align-items: flex-end;
- margin-bottom: 10px;
- border-radius: 2px;
+#buttons {
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#buttons{
- max-width: 400px;
- display: flex;
- flex-wrap: wrap;
+button {
+  flex: 1 25%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 5px;
 }
 
-button{
- flex: 1 25%;
- padding: 15px;
- font-size: 20px;
- border-radius: 5px;
+.clear,
+.delete {
+  flex: 2 50%;
+  background-color: orange;
+  color: white;
 }
 
-.clear,.delete{
- flex: 2 50%;
- background-color: orange;
- 
+.digits {
+  background-color: rgb(121, 121, 121);
+  color: white;
 }
 
-.digits{
- background-color: lightgray;
+.operators {
+  background-color: rgb(17, 43, 174);
+  color: white;
+  border-left: none;
+  border-top: none;
 }
 
-.operators{
- background-color: rgb(103, 101, 101);
+.equal,
+.dot {
+  color: white;
+  background-color: brown;
+  border-top: none;
+  border-left: none;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding: 20px;
+  background-color: azure;
+}
+
+footer a {
+  text-decoration: none;
+  color: brown;
 }
